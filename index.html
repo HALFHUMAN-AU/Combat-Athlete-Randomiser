@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HALFHUMAN | Combat Athlete Randomiser</title>
   <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Desktop PDF export library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
@@ -23,10 +25,7 @@
     /* Gate overlay */
     #gateOverlay {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: rgba(0, 0, 0, 0.95);
       color: #fff;
       display: flex;
@@ -37,7 +36,6 @@
       text-align: center;
       padding: 1rem;
     }
-
     #gateOverlay input {
       padding: 10px;
       font-size: 1rem;
@@ -47,7 +45,6 @@
       background: #111;
       color: #fff;
     }
-
     #gateOverlay button {
       margin-top: 1rem;
       padding: 10px 20px;
@@ -66,7 +63,6 @@
       75% { transform: translateX(-8px); }
       100% { transform: translateX(0); }
     }
-
     .shake { animation: shake 0.4s; }
 
     /* Vertical spine */
@@ -166,7 +162,8 @@
       page-break-inside: avoid;
       break-inside: avoid;
     }
-        /* Subtle background colors inverted for intensity */
+
+    /* Inverted blue/grey intensity */
     .section.prepare  { background-color: #829ab1; }  /* light desaturated blue-grey */
     .section.cardio   { background-color: #627d98; }  /* cool grey-blue */
     .section.warmup   { background-color: #486581; }  /* steel blue */
@@ -183,7 +180,6 @@
       color: #ffffff;
       text-transform: uppercase;
     }
-
     .section h2 svg { margin-right: 0.5rem; }
 
     ul { margin: 0; padding-left: 1.2rem; color: #ffffff; }
@@ -206,7 +202,6 @@
       .controls label, .controls select, .controls button { width: 100%; margin: 0.25rem 0; }
       .side-spine { left: 5px; height: 60vh; opacity: 0.25; }
     }
-
     @media (max-width: 480px) {
       body { margin: 1rem auto; padding: 0 0.5rem 2rem; }
       h1 { font-size: 1.2rem; letter-spacing: 3px; }
@@ -214,8 +209,9 @@
       button { padding: 10px; font-size: 0.8rem; }
     }
 
-    /* Print stylesheet */
+    /* Print stylesheet (for mobile fallback & desktop print) */
     @media print {
+      * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
       body { background: #fff; color: #000; }
       .side-spine, .controls, #gateOverlay { display: none !important; }
       .section {
@@ -239,8 +235,8 @@
     <p style="font-size:0.8rem; color:#aaa; margin-top:1rem;">Promo access for first 100 only.</p>
   </div>
 
-  <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200"
-    preserveAspectRatio="xMidYMid meet">
+  <!-- Spine -->
+  <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200" preserveAspectRatio="xMidYMid meet">
     <line x1="195" y1="50" x2="195" y2="1150" stroke="#444" stroke-width="2" />
     <clipPath id="cutoff"><rect x="0" y="0" width="192" height="1200" /></clipPath>
     <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333" text-anchor="middle">
@@ -259,6 +255,7 @@
     <p><em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice. Always consult your doctor or a qualified health professional before beginning any new exercise program.</p>
   </div>
 
+  <!-- Controls -->
   <div class="controls">
     <label><input type="checkbox" id="includeCardio" checked> Cardio warm-up</label>
     <select id="cardioChoice">
@@ -270,15 +267,17 @@
     <label><input type="checkbox" id="includeFinisher" checked> Finisher</label>
     <button onclick="generate()">Generate</button>
     <button class="clear-btn" onclick="clearOutput()">Clear</button>
-    <button onclick="window.print()">Print / Save PDF</button>
+    <button onclick="downloadPDF()">Export PDF</button>
   </div>
 
+  <!-- Exportable content -->
   <div id="pdfContent">
     <div id="output"></div>
     <div class="copyright">© HALFHUMAN 2025</div>
   </div>
 
   <script>
+    // Gate logic with shake
     function checkCode() {
       const input = document.getElementById("accessCode");
       const overlay = document.getElementById("gateOverlay");
@@ -290,6 +289,7 @@
       }
     }
 
+    // Pools
     const prepRestore = {
       wholeBody: ["Cat Cow / thread the needle", "4 point iso"],
       upper: ["Back extension Y raise", "Scapula push ups", "Active hang"],
@@ -331,22 +331,28 @@
       const cardioChoice = document.getElementById("cardioChoice").value;
       let output = "";
 
+      // Prepare/Restore (2–3)
       let prep = [pickOne(prepRestore.wholeBody), pickOne(prepRestore.lower)];
       let maybeUpper = maybePickOne(prepRestore.upper);
       if (maybeUpper) prep.push(maybeUpper);
       output += section("Prepare / Restore", "activity", prep, "prepare");
 
+      // Cardio (optional)
       if (includeCardio) output += section("Cardio Warm Up", "heart", [cardioChoice], "cardio");
 
+      // Warm Up (3)
       let wu = [pickOne(warmUp.wholeBody), pickOne(warmUp.upper), pickOne(warmUp.lower)];
       output += section("Warm Up", "flame", wu, "warmup");
 
+      // Main (3)
       let m = [pickOne(main.wholeBody), pickOne(main.upper), pickOne(main.lower)];
       output += section("Main", "dumbbell", m, "main");
 
+      // Assistance (2)
       let assist = [pickOne(assistance.wholeBody), pickOne([...assistance.upper, ...assistance.lower])];
       output += section("Assistance", "shield", assist, "assist");
 
+      // Finisher (optional)
       if (includeFinisher) {
         let fin = pickOne(finishers);
         output += section("Finisher", "zap", [fin], "finisher");
@@ -366,6 +372,29 @@
           <h2><i data-lucide="${icon}"></i> ${title}</h2>
           <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul>
         </div>`;
+    }
+
+    // Hybrid export: Desktop = html2pdf, Mobile/Small = native print
+    function downloadPDF() {
+      const element = document.getElementById("pdfContent");
+      const isSmallScreen = window.matchMedia("(max-width: 768px)").matches;
+      const isMobileUA = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+      if (isSmallScreen || isMobileUA) {
+        // Mobile: reliable print/save dialog
+        window.print();
+      } else {
+        // Desktop: proper A4 PDF export
+        const options = {
+          margin: 0.2,
+          filename: 'HALFHUMAN_Workout.pdf',
+          image: { type: 'jpeg', quality: 0.98 },
+          html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+          jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+          pagebreak: { mode: 'avoid' }
+        };
+        html2pdf().set(options).from(element).save();
+      }
     }
   </script>
 </body>
