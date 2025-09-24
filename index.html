@@ -3,9 +3,9 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>HALFHUMAN | Combat Athlete Randomiser</title>
   <script src="https://unpkg.com/lucide@latest"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
@@ -59,32 +59,15 @@
       cursor: pointer;
     }
 
-    /* Shake animation */
     @keyframes shake {
-      0% {
-        transform: translateX(0);
-      }
-
-      25% {
-        transform: translateX(-8px);
-      }
-
-      50% {
-        transform: translateX(8px);
-      }
-
-      75% {
-        transform: translateX(-8px);
-      }
-
-      100% {
-        transform: translateX(0);
-      }
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-8px); }
+      50% { transform: translateX(8px); }
+      75% { transform: translateX(-8px); }
+      100% { transform: translateX(0); }
     }
 
-    .shake {
-      animation: shake 0.4s;
-    }
+    .shake { animation: shake 0.4s; }
 
     /* Vertical spine */
     .side-spine {
@@ -131,13 +114,9 @@
       flex-wrap: wrap;
     }
 
-    label {
-      font-size: 0.9rem;
-      color: #ffffff;
-    }
+    label { font-size: 0.9rem; color: #ffffff; }
 
-    select,
-    input[type="checkbox"] {
+    select, input[type="checkbox"] {
       background: #111;
       color: #ffffff;
       border: 1px solid #222;
@@ -147,7 +126,7 @@
 
     button {
       background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.6)),
-        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+                  url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
       background-size: 2px 2px;
       color: #ffffff;
       border: 1px solid #444;
@@ -160,22 +139,22 @@
       letter-spacing: 0.5px;
       transition: all 0.2s ease;
       box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.06),
-        inset -1px -1px 2px rgba(0, 0, 0, 0.6),
-        0 3px 6px rgba(0, 0, 0, 0.7);
+                  inset -1px -1px 2px rgba(0, 0, 0, 0.6),
+                  0 3px 6px rgba(0, 0, 0, 0.7);
     }
 
     button:hover {
       filter: brightness(1.15);
       box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.1),
-        inset -1px -1px 3px rgba(0, 0, 0, 0.7),
-        0 4px 8px rgba(0, 0, 0, 0.9);
+                  inset -1px -1px 3px rgba(0, 0, 0, 0.7),
+                  0 4px 8px rgba(0, 0, 0, 0.9);
     }
 
     .clear-btn {
       border: 1px solid #661e1e;
       color: #ffffff;
       background: linear-gradient(145deg, rgba(255, 80, 80, 0.25), rgba(0, 0, 0, 0.7)),
-        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+                  url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
       background-size: 2px 2px;
     }
 
@@ -188,30 +167,12 @@
       break-inside: avoid;
     }
 
-    /* Subtle background colors */
-    .section.prepare {
-      background-color: #0d2d2d;
-    }
-
-    .section.cardio {
-      background-color: #2d2d0d;
-    }
-
-    .section.warmup {
-      background-color: #2d2d0d;
-    }
-
-    .section.main {
-      background-color: #1a1f2d;
-    }
-
-    .section.assist {
-      background-color: #1a2d1a;
-    }
-
-    .section.finisher {
-      background-color: #2d0d0d;
-    }
+    .section.prepare  { background-color: #0d2d2d; }
+    .section.cardio   { background-color: #2d2d0d; }
+    .section.warmup   { background-color: #2d2d0d; }
+    .section.main     { background-color: #1a1f2d; }
+    .section.assist   { background-color: #1a2d1a; }
+    .section.finisher { background-color: #2d0d0d; }
 
     .section h2 {
       display: flex;
@@ -223,19 +184,10 @@
       text-transform: uppercase;
     }
 
-    .section h2 svg {
-      margin-right: 0.5rem;
-    }
+    .section h2 svg { margin-right: 0.5rem; }
 
-    ul {
-      margin: 0;
-      padding-left: 1.2rem;
-      color: #ffffff;
-    }
-
-    ul li {
-      margin-bottom: 0.4rem;
-    }
+    ul { margin: 0; padding-left: 1.2rem; color: #ffffff; }
+    ul li { margin-bottom: 0.4rem; }
 
     .copyright {
       text-align: center;
@@ -246,55 +198,32 @@
       border-top: 1px solid #222;
     }
 
-    /* Responsive adjustments */
+    /* Responsive */
     @media (max-width: 768px) {
-      h1 {
-        font-size: 1.5rem;
-        letter-spacing: 4px;
-      }
-
-      h2 {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .controls label,
-      .controls select,
-      .controls button {
-        width: 100%;
-        margin: 0.25rem 0;
-      }
-
-      .side-spine {
-        left: 5px;
-        height: 60vh;
-        opacity: 0.25;
-      }
+      h1 { font-size: 1.5rem; letter-spacing: 4px; }
+      h2 { font-size: 1rem; margin-bottom: 1rem; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .controls label, .controls select, .controls button { width: 100%; margin: 0.25rem 0; }
+      .side-spine { left: 5px; height: 60vh; opacity: 0.25; }
     }
 
     @media (max-width: 480px) {
-      body {
-        margin: 1rem auto;
-        padding: 0 0.5rem 2rem;
-      }
+      body { margin: 1rem auto; padding: 0 0.5rem 2rem; }
+      h1 { font-size: 1.2rem; letter-spacing: 3px; }
+      .intro { font-size: 0.85rem; }
+      button { padding: 10px; font-size: 0.8rem; }
+    }
 
-      h1 {
-        font-size: 1.2rem;
-        letter-spacing: 3px;
-      }
-
-      .intro {
-        font-size: 0.85rem;
-      }
-
-      button {
-        padding: 10px;
-        font-size: 0.8rem;
+    /* Print stylesheet */
+    @media print {
+      body { background: #fff; color: #000; }
+      .side-spine, .controls, #gateOverlay { display: none !important; }
+      .section {
+        background: #fff;
+        color: #000;
+        border: 1px solid #000;
+        page-break-inside: avoid;
+        break-inside: avoid;
       }
     }
   </style>
@@ -313,19 +242,10 @@
   <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200"
     preserveAspectRatio="xMidYMid meet">
     <line x1="195" y1="50" x2="195" y2="1150" stroke="#444" stroke-width="2" />
-    <clipPath id="cutoff">
-      <rect x="0" y="0" width="192" height="1200" />
-    </clipPath>
-    <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333"
-      text-anchor="middle">
-      <text x="190" y="150">H</text>
-      <text x="190" y="270">A</text>
-      <text x="190" y="390">L</text>
-      <text x="190" y="510">F</text>
-      <text x="190" y="630">H</text>
-      <text x="190" y="750">U</text>
-      <text x="190" y="870">M</text>
-      <text x="190" y="990">A</text>
+    <clipPath id="cutoff"><rect x="0" y="0" width="192" height="1200" /></clipPath>
+    <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333" text-anchor="middle">
+      <text x="190" y="150">H</text><text x="190" y="270">A</text><text x="190" y="390">L</text><text x="190" y="510">F</text>
+      <text x="190" y="630">H</text><text x="190" y="750">U</text><text x="190" y="870">M</text><text x="190" y="990">A</text>
       <text x="190" y="1110">N</text>
     </g>
   </svg>
@@ -333,16 +253,12 @@
   <h1>HALFHUMAN</h1>
   <h2>Combat Athlete Randomiser</h2>
 
-  <!-- Intro -->
   <div class="intro">
-    <p>This tool generates varied strength, conditioning, & movement sessions to challenge beginner to intermediate
-      combat athletes in a balanced way.</p>
+    <p>This tool generates varied strength, conditioning, & movement sessions to challenge beginner to intermediate combat athletes in a balanced way.</p>
     <p><strong>It’s designed for variety and inspiration, not prescription.</strong></p>
-    <p><em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice. Always consult
-      your doctor or a qualified health professional before beginning any new exercise program.</p>
+    <p><em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice. Always consult your doctor or a qualified health professional before beginning any new exercise program.</p>
   </div>
 
-  <!-- Controls -->
   <div class="controls">
     <label><input type="checkbox" id="includeCardio" checked> Cardio warm-up</label>
     <select id="cardioChoice">
@@ -354,7 +270,7 @@
     <label><input type="checkbox" id="includeFinisher" checked> Finisher</label>
     <button onclick="generate()">Generate</button>
     <button class="clear-btn" onclick="clearOutput()">Clear</button>
-    <button onclick="downloadPDF()">Export PDF</button>
+    <button onclick="window.print()">Print / Save PDF</button>
   </div>
 
   <div id="pdfContent">
@@ -363,7 +279,6 @@
   </div>
 
   <script>
-    // Gate logic with shake
     function checkCode() {
       const input = document.getElementById("accessCode");
       const overlay = document.getElementById("gateOverlay");
@@ -375,7 +290,6 @@
       }
     }
 
-    // Pools
     const prepRestore = {
       wholeBody: ["Cat Cow / thread the needle", "4 point iso"],
       upper: ["Back extension Y raise", "Scapula push ups", "Active hang"],
@@ -453,20 +367,6 @@
           <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul>
         </div>`;
     }
-
-    function downloadPDF() {
-      const element = document.getElementById("pdfContent");
-      const options = {
-        margin: 0.5,
-        filename: 'HALFHUMAN_Workout.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: ['css', 'legacy'] }
-      };
-      html2pdf().set(options).from(element).save();
-    }
   </script>
 </body>
-
 </html>
