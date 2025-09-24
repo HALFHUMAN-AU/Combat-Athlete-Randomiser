@@ -4,6 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <title>HALFHUMAN | Combat Athlete Randomiser</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://unpkg.com/lucide@latest"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <style>
@@ -23,8 +24,11 @@
     /* Gate overlay */
     #gateOverlay {
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.95);
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.95);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -34,6 +38,7 @@
       text-align: center;
       padding: 1rem;
     }
+
     #gateOverlay input {
       padding: 10px;
       font-size: 1rem;
@@ -43,6 +48,7 @@
       background: #111;
       color: #fff;
     }
+
     #gateOverlay button {
       margin-top: 1rem;
       padding: 10px 20px;
@@ -62,6 +68,7 @@
       75% { transform: translateX(-8px); }
       100% { transform: translateX(0); }
     }
+
     .shake {
       animation: shake 0.4s;
     }
@@ -111,9 +118,13 @@
       flex-wrap: wrap;
     }
 
-    label { font-size: 0.9rem; color: #ffffff; }
+    label {
+      font-size: 0.9rem;
+      color: #ffffff;
+    }
 
-    select, input[type="checkbox"] {
+    select,
+    input[type="checkbox"] {
       background: #111;
       color: #ffffff;
       border: 1px solid #222;
@@ -122,8 +133,9 @@
     }
 
     button {
-      background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.6)),
-                  url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.6)),
+        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
       background-size: 2px 2px;
       color: #ffffff;
       border: 1px solid #444;
@@ -135,23 +147,26 @@
       text-transform: uppercase;
       letter-spacing: 0.5px;
       transition: all 0.2s ease;
-      box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.06),
-                  inset -1px -1px 2px rgba(0, 0, 0, 0.6),
-                  0 3px 6px rgba(0, 0, 0, 0.7);
+      box-shadow:
+        inset 1px 1px 2px rgba(255, 255, 255, 0.06),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.6),
+        0 3px 6px rgba(0, 0, 0, 0.7);
     }
 
     button:hover {
       filter: brightness(1.15);
-      box-shadow: inset 1px 1px 3px rgba(255, 255, 255, 0.1),
-                  inset -1px -1px 3px rgba(0, 0, 0, 0.7),
-                  0 4px 8px rgba(0, 0, 0, 0.9);
+      box-shadow:
+        inset 1px 1px 3px rgba(255, 255, 255, 0.1),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.7),
+        0 4px 8px rgba(0, 0, 0, 0.9);
     }
 
     .clear-btn {
       border: 1px solid #661e1e;
       color: #ffffff;
-      background: linear-gradient(145deg, rgba(255, 80, 80, 0.25), rgba(0, 0, 0, 0.7)),
-                  url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+      background:
+        linear-gradient(145deg, rgba(255, 80, 80, 0.25), rgba(0, 0, 0, 0.7)),
+        url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
       background-size: 2px 2px;
     }
 
@@ -163,11 +178,11 @@
     }
 
     /* Subtle background colors */
-    .section.prepare  { background-color: #0d2d2d; }
-    .section.cardio   { background-color: #2d2d0d; }
-    .section.warmup   { background-color: #2d2d0d; }
-    .section.main     { background-color: #1a1f2d; }
-    .section.assist   { background-color: #1a2d1a; }
+    .section.prepare { background-color: #0d2d2d; }
+    .section.cardio { background-color: #2d2d0d; }
+    .section.warmup { background-color: #2d2d0d; }
+    .section.main { background-color: #1a1f2d; }
+    .section.assist { background-color: #1a2d1a; }
     .section.finisher { background-color: #2d0d0d; }
 
     .section h2 {
@@ -180,10 +195,19 @@
       text-transform: uppercase;
     }
 
-    .section h2 svg { margin-right: 0.5rem; }
+    .section h2 svg {
+      margin-right: 0.5rem;
+    }
 
-    ul { margin: 0; padding-left: 1.2rem; color: #ffffff; }
-    ul li { margin-bottom: 0.4rem; }
+    ul {
+      margin: 0;
+      padding-left: 1.2rem;
+      color: #ffffff;
+    }
+
+    ul li {
+      margin-bottom: 0.4rem;
+    }
 
     .copyright {
       text-align: center;
@@ -193,50 +217,22 @@
       padding-top: 1rem;
       border-top: 1px solid #222;
     }
-    /* Responsive adjustments */
-@media (max-width: 768px) {
-  h1 {
-    font-size: 1.5rem;
-    letter-spacing: 4px;
-  }
-  h2 {
-    font-size: 1rem;
-    margin-bottom: 1rem;
-  }
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .controls label,
-  .controls select,
-  .controls button {
-    width: 100%;
-    margin: 0.25rem 0;
-  }
-  .side-spine {
-    left: 5px;
-    height: 60vh;
-    opacity: 0.25;
-  }
-}
 
-@media (max-width: 480px) {
-  body {
-    margin: 1rem auto;
-    padding: 0 0.5rem 2rem;
-  }
-  h1 {
-    font-size: 1.2rem;
-    letter-spacing: 3px;
-  }
-  .intro {
-    font-size: 0.85rem;
-  }
-  button {
-    padding: 10px;
-    font-size: 0.8rem;
-  }
-}
+    /* Responsive tweaks */
+    @media (max-width: 768px) {
+      h1 { font-size: 1.5rem; letter-spacing: 4px; }
+      h2 { font-size: 1rem; margin-bottom: 1rem; }
+      .controls { flex-direction: column; align-items: stretch; }
+      .controls>* { width: 100%; margin: 0.25rem 0; }
+      .side-spine { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      body { margin: 1rem auto; padding: 0 0.5rem 2rem; }
+      h1 { font-size: 1.2rem; letter-spacing: 3px; }
+      .intro { font-size: 0.85rem; }
+      button { padding: 10px; font-size: 0.8rem; }
+    }
   </style>
 </head>
 
@@ -250,13 +246,13 @@
     <p style="font-size:0.8rem; color:#aaa; margin-top:1rem;">Promo access for first 100 only.</p>
   </div>
 
-  <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200"
-    preserveAspectRatio="xMidYMid meet">
+  <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200" preserveAspectRatio="xMidYMid meet">
     <line x1="195" y1="50" x2="195" y2="1150" stroke="#444" stroke-width="2" />
     <clipPath id="cutoff">
       <rect x="0" y="0" width="192" height="1200" />
     </clipPath>
-    <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333" text-anchor="middle">
+    <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333"
+      text-anchor="middle">
       <text x="190" y="150">H</text>
       <text x="190" y="270">A</text>
       <text x="190" y="390">L</text>
@@ -274,9 +270,11 @@
 
   <!-- Intro -->
   <div class="intro">
-    <p>This tool generates varied strength, conditioning, & movement sessions to challenge beginner to intermediate combat athletes in a balanced way.</p>
+    <p>This tool generates varied strength, conditioning, & movement sessions to challenge beginner to intermediate
+      combat athletes in a balanced way.</p>
     <p><strong>It’s designed for variety and inspiration, not prescription.</strong></p>
-    <p><em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice. Always consult your doctor or a qualified health professional before beginning any new exercise program.</p>
+    <p><em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice. Always consult
+      your doctor or a qualified health professional before beginning any new exercise program.</p>
   </div>
 
   <!-- Controls -->
@@ -300,7 +298,7 @@
   </div>
 
   <script>
-    // Gate logic with shake
+    // Gate logic
     function checkCode() {
       const input = document.getElementById("accessCode");
       const overlay = document.getElementById("gateOverlay");
@@ -379,9 +377,7 @@
       lucide.createIcons();
     }
 
-    function clearOutput() {
-      document.getElementById("output").innerHTML = "";
-    }
+    function clearOutput() { document.getElementById("output").innerHTML = ""; }
 
     function section(title, icon, items, className) {
       return `
