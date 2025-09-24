@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HALFHUMAN | Combat Athlete Randomiser</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1rem 3rem;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        /* Vertical spine */
+        .side-spine {
+            position: fixed;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+            height: 85vh;
+            opacity: 0.35;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: 6px;
+            margin-bottom: 0.25rem;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: 1px;
+            margin-bottom: 2rem;
+        }
+
+        .intro {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #ccc;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        label {
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        select,
+        input[type="checkbox"] {
+            background: #111;
+            color: #ffffff;
+            border: 1px solid #222;
+            padding: 6px 10px;
+            border-radius: 4px;
+        }
+
+        button {
+            background:
+                linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(0, 0, 0, 0.6)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background-size: 2px 2px;
+            color: #ffffff;
+            border: 1px solid #444;
+            padding: 12px 22px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+            box-shadow:
+                inset 1px 1px 2px rgba(255, 255, 255, 0.06),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.6),
+                0 3px 6px rgba(0, 0, 0, 0.7);
+        }
+
+        button:hover {
+            filter: brightness(1.15);
+            box-shadow:
+                inset 1px 1px 3px rgba(255, 255, 255, 0.1),
+                inset -1px -1px 3px rgba(0, 0, 0, 0.7),
+                0 4px 8px rgba(0, 0, 0, 0.9);
+        }
+
+        .clear-btn {
+            border: 1px solid #661e1e;
+            color: #ffffff;
+            background:
+                linear-gradient(145deg, rgba(255, 80, 80, 0.25), rgba(0, 0, 0, 0.7)),
+                url('https://www.transparenttextures.com/patterns/carbon-fibre.png');
+            background-size: 2px 2px;
+        }
+
+        .section {
+            border: 1px solid #222;
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        /* Subtle background colors */
+        .section.prepare {
+            background-color: #0d2d2d;
+        }
+
+        .section.cardio {
+            background-color: #2d2d0d;
+        }
+
+        .section.warmup {
+            background-color: #2d2d0d;
+        }
+
+        .section.main {
+            background-color: #1a1f2d;
+        }
+
+        .section.assist {
+            background-color: #1a2d1a;
+        }
+
+        .section.finisher {
+            background-color: #2d0d0d;
+        }
+
+        .section h2 {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .section h2 svg {
+            margin-right: 0.5rem;
+        }
+
+        ul {
+            margin: 0;
+            padding-left: 1.2rem;
+            color: #ffffff;
+        }
+
+        ul li {
+            margin-bottom: 0.4rem;
+        }
+
+        .copyright {
+            text-align: center;
+            font-size: 0.8rem;
+            color: #888;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #222;
+        }
+    </style>
+</head>
+
+<body>
+    <svg class="side-spine" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 1200"
+        preserveAspectRatio="xMidYMid meet">
+        <line x1="195" y1="50" x2="195" y2="1150" stroke="#444" stroke-width="2" />
+        <clipPath id="cutoff">
+            <rect x="0" y="0" width="192" height="1200" />
+        </clipPath>
+        <g clip-path="url(#cutoff)" font-family="Montserrat, sans-serif" font-size="72" font-weight="700" fill="#333"
+            text-anchor="middle">
+            <text x="190" y="150">H</text>
+            <text x="190" y="270">A</text>
+            <text x="190" y="390">L</text>
+            <text x="190" y="510">F</text>
+            <text x="190" y="630">H</text>
+            <text x="190" y="750">U</text>
+            <text x="190" y="870">M</text>
+            <text x="190" y="990">A</text>
+            <text x="190" y="1110">N</text>
+        </g>
+    </svg>
+
+    <h1>HALFHUMAN</h1>
+    <h2>Combat Athlete Randomiser</h2>
+
+    <!-- Intro & disclaimer -->
+    <div class="intro">
+        <p>
+            This tool generates varied strength, conditioning, & movement sessions to challenge beginner
+            to intermediate combat athletes in a balanced way.
+        </p>
+        <p>
+            <strong>It’s designed for variety and inspiration, not prescription.</strong>
+        </p>
+        <p>
+            <em>Disclaimer:</em> The content is general in nature and not a substitute for professional advice.
+            Always consult your doctor or a qualified health professional before beginning any new exercise program.
+        </p>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <label>
+            <input type="checkbox" id="includeCardio" checked> Cardio warm-up
+        </label>
+        <select id="cardioChoice">
+            <option>Assault bike</option>
+            <option>Rower</option>
+            <option>Skipping rope</option>
+            <option>Cross-trainer</option>
+        </select>
+        <label>
+            <input type="checkbox" id="includeFinisher" checked> Finisher
+        </label>
+        <button onclick="generate()">Generate</button>
+        <button class="clear-btn" onclick="clearOutput()">Clear</button>
+        <button onclick="downloadPDF()">Export PDF</button>
+    </div>
+
+    <!-- PDF content -->
+    <div id="pdfContent">
+        <div id="output"></div>
+        <div class="copyright">© HALFHUMAN 2025</div>
+    </div>
+
+    <script>
+        const prepRestore = {
+            wholeBody: ["Cat Cow / thread the needle", "4 point iso"],
+            upper: ["Back extension Y raise", "Scapula push ups", "Active hang"],
+            lower: ["Standing hip circles", "Banded lying hip flexor", "Adductor plank",
+                "Cossack squat – fixed feet", "Single hip thrust to hamstring lower"]
+        };
+
+        const warmUp = {
+            wholeBody: ["Turkish get up", "Bosu / Swiss ball round the worlds", "Straddle out"],
+            upper: ["Banded pull apart", "Jefferson curl", "Yoga push up"],
+            lower: ["Medball squat to 180 bounce", "Single farmer’s carry (mid weight)",
+                "Drop lunge w/ rotation", "DB hang clean"]
+        };
+
+        const main = {
+            wholeBody: ["Switch stance landmine press", "KB / DB clean and press",
+                "Double offset farmer’s carry", "Sandbag floor to shoulder"],
+            upper: ["Split stance overhead barbell press", "Supine barbell wipers"],
+            lower: ["Goblet squat", "Single-leg KB / DB RDL", "Prowler / cable drag",
+                "Plate Zercher squat"]
+        };
+
+        const assistance = {
+            wholeBody: ["Medball wall ball", "Sit thru", "Low bum bear crawl"],
+            upper: ["Pull up", "Protracted plank", "Slider wide grip push up",
+                "Wide stance single-arm row"],
+            lower: ["Cossack squat – step/return", "Box jump",
+                "Loaded, elevated knees-over-toes lunge"]
+        };
+
+        const finishers = [
+            "Tailpipe: 250m row → KBs in front rack x 3 rounds.",
+            "Sandbag + Ski Erg: 10 sandbag to shoulders (5xL + 5xR) + 30s Ski Erg × 4–6 rounds.",
+            "Deadman Carry Ladder: 20m heavy plate carry + push-ups (20/15/10/5).",
+            "300 Shuttle: 10 × 30m sprints (walk back recovery).",
+            "Barbell ISO + Air Bike: Deadlift hold @ 50-60% BW + 20 cal bike, switch × 3–4 rounds."
+        ];
+
+        function pickOne(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+        function maybePickOne(arr, chance = 0.5) { return Math.random() < chance ? pickOne(arr) : null; }
+
+        function generate() {
+            const includeCardio = document.getElementById("includeCardio").checked;
+            const includeFinisher = document.getElementById("includeFinisher").checked;
+            const cardioChoice = document.getElementById("cardioChoice").value;
+            let output = "";
+
+            let prep = [pickOne(prepRestore.wholeBody), pickOne(prepRestore.lower)];
+            let maybeUpper = maybePickOne(prepRestore.upper);
+            if (maybeUpper) prep.push(maybeUpper);
+            output += section("Prepare / Restore", "activity", prep, "prepare");
+
+            if (includeCardio) {
+                output += section("Cardio Warm Up", "heart", [cardioChoice], "cardio");
+            }
+
+            let wu = [pickOne(warmUp.wholeBody), pickOne(warmUp.upper), pickOne(warmUp.lower)];
+            output += section("Warm Up", "flame", wu, "warmup");
+
+            let m = [pickOne(main.wholeBody), pickOne(main.upper), pickOne(main.lower)];
+            output += section("Main", "dumbbell", m, "main");
+
+            let assist = [pickOne(assistance.wholeBody), pickOne([...assistance.upper, ...assistance.lower])];
+            output += section("Assistance", "shield", assist, "assist");
+
+            if (includeFinisher) {
+                let fin = pickOne(finishers);
+                output += section("Finisher", "zap", [fin], "finisher");
+            }
+
+            document.getElementById("output").innerHTML = output;
+            lucide.createIcons();
+        }
+
+        function clearOutput() {
+            document.getElementById("output").innerHTML = "";
+        }
+
+        function section(title, icon, items, className) {
+            return `
+        <div class="section ${className}">
+          <h2><i data-lucide="${icon}"></i> ${title}</h2>
+          <ul>${items.map(i => `<li>${i}</li>`).join("")}</ul>
+        </div>
+      `;
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById("pdfContent");
+            const options = {
+                margin: 0.2,
+                filename: 'HALFHUMAN_Workout.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: 'avoid' }
+            };
+            html2pdf().set(options).from(element).save();
+        }
+    </script>
+</body>
+
+</html>
