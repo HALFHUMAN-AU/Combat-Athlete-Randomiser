@@ -171,11 +171,12 @@
     }
 
     .section {
-      border: 1px solid #222;
-      border-radius: 6px;
-      padding: 1rem;
-      margin-top: 1rem;
-    }
+  border: 1px solid #222;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-top: 1rem;
+  page-break-inside: avoid; /* NEW: keep module intact */
+}
 
     /* Subtle background colors */
     .section.prepare { background-color: #0d2d2d; }
@@ -388,17 +389,17 @@
     }
 
     function downloadPDF() {
-      const element = document.getElementById("pdfContent");
-      const options = {
-        margin: 0.2,
-        filename: 'HALFHUMAN_Workout.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true },
-        jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
-        pagebreak: { mode: 'avoid' }
-      };
-      html2pdf().set(options).from(element).save();
-    }
+  const element = document.getElementById("pdfContent");
+  const options = {
+    margin: 0.2,
+    filename: 'HALFHUMAN_Workout.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' },
+    pagebreak: { mode: ['css'] } // respects .section no-split
+  };
+  html2pdf().set(options).from(element).save();
+}
   </script>
 </body>
 </html>
